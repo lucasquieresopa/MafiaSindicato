@@ -1,9 +1,7 @@
 package com.sindicato.mafiasindicato
 
 class Greeting {
-    private val platform = getPlatform()
-
     fun greet(): String {
-        return "Hello, ${platform.name}!"
+        return "Welcome to Mafia Sindicato!" // Hardcode a single string for all platforms
     }
 }
