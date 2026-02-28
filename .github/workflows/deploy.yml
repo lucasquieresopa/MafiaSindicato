@@ -25,6 +25,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
+      # Grant executable permission to the gradlew wrapper
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+
       # This task generates the web distribution in build/dist/wasmJs/productionExecutable
       - name: Build Web App
         run: ./gradlew :composeApp:wasmJsBrowserDistribution
