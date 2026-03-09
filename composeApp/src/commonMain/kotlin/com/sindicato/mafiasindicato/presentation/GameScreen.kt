@@ -50,93 +50,18 @@ fun GameScreen(
     gameState: GameState, // Passing the list of state objects
     onNavigateToHome: () -> Unit
 ) {
-    val pagerState = rememberPagerState(pageCount = { gameState.players.size })
-    val scope = rememberCoroutineScope()
+
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Back Button
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
-            Button(onClick = onNavigateToHome) {
-                Text("Back")
-            }
-        }
-
-        Spacer(modifier = Modifier.height(32.dp))
-
-        // Lateral (Horizontal) Scrollable Area
-        Box(modifier = Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.Center) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-
-                // Left Arrow
-                IconButton(
-                    onClick = { scope.launch { pagerState.animateScrollToPage(pagerState.currentPage - 1) } },
-                    enabled = pagerState.currentPage > 0
-                ) {
-                    Icon(Icons.AutoMirrored.Filled.KeyboardArrowLeft, contentDescription = "Previous")
-                }
-
-                // Individual Player Box (Pager)
-                HorizontalPager(
-                    state = pagerState,
-                    modifier = Modifier.weight(1f).height(400.dp),
-                    contentPadding = PaddingValues(horizontal = 32.dp),
-                    pageSpacing = 16.dp
-                ) { page ->
-                    PlayerBox(gameState.players[page])
-                }
-
-                // Right Arrow
-                IconButton(
-                    onClick = { scope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) } },
-                    enabled = pagerState.currentPage < gameState.players.size - 1
-                ) {
-                    Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = "Next")
-                }
-            }
-        }
+        Text("En juego")
     }
 }
 
-
-@Composable
-fun PlayerBox(player: Player) {
-    var revealed by remember { mutableStateOf(player.isRevealed) }
-
-    Card(
-        modifier = Modifier.fillMaxSize(),
-        shape = RoundedCornerShape(24.dp),
-        elevation = CardDefaults.cardElevation(4.dp)
-    ) {
-        Column(
-            modifier = Modifier.fillMaxSize().padding(24.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(player.name, fontSize = 32.sp, fontWeight = FontWeight.Bold)
-
-            Spacer(modifier = Modifier.height(40.dp))
-
-            if (!revealed) {
-                Button(
-                    modifier = Modifier
-                        .size(150.dp),
-                    shape = androidx.compose.foundation.shape.RoundedCornerShape(12.dp),
-                    onClick = { revealed = true }
-                ) {
-                    Text("Show Role", textAlign = androidx.compose.ui.text.style.TextAlign.Center)
-                }
-            } else {
-
-                OutlinedButton(onClick = { revealed = false }) {
-                    Text("Hide")
-                }
-            }
-        }
-    }
-}
 
 
 

@@ -17,6 +17,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.sindicato.mafiasindicato.presentation.GameScreen
 import com.sindicato.mafiasindicato.presentation.HomeScreen
+import com.sindicato.mafiasindicato.presentation.state.GameState
 import kotlinx.serialization.Serializable
 
 
@@ -50,6 +51,7 @@ fun App() {
 
                 composable<Game> {
                     GameScreen(
+                        gameState = GameState(),
                         onNavigateToHome = { navController.popBackStack() }
                     )
                 }
