@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun HomeScreen(
-    onNavigateToGame: () -> Unit
+    onNavigateToConfig: () -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -21,7 +21,7 @@ fun HomeScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text("Home Screen", style = MaterialTheme.typography.headlineMedium)
-        Button(onClick = onNavigateToGame) {
+        Button(onClick = onNavigateToConfig) {
             Text("Iniciar Juego")
         }
     }
@@ -32,7 +32,7 @@ fun HomeScreen(
 fun HomeScreenPreview() {
     MaterialTheme {
         HomeScreen(
-            onNavigateToGame = {}
+            onNavigateToConfig = {}
         )
     }
 }

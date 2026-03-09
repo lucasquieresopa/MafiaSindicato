@@ -15,8 +15,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.sindicato.mafiasindicato.presentation.ConfigurationScreen
 import com.sindicato.mafiasindicato.presentation.GameScreen
 import com.sindicato.mafiasindicato.presentation.HomeScreen
+import com.sindicato.mafiasindicato.presentation.MafiaViewModel
 import com.sindicato.mafiasindicato.presentation.state.GameState
 import kotlinx.serialization.Serializable
 
@@ -26,6 +28,10 @@ object Home
 
 @Serializable
 object Game
+
+@Serializable
+object Configuration
+
 @Composable
 fun App() {
     MaterialTheme {
@@ -44,7 +50,7 @@ fun App() {
             ) {
                 composable<Home> {
                     HomeScreen(
-                        onNavigateToGame = { navController.navigate(Game) }
+                        onNavigateToConfig = { navController.navigate(Configuration) }
 
                     )
                 }
@@ -54,6 +60,15 @@ fun App() {
                         gameState = GameState(),
                         onNavigateToHome = { navController.popBackStack() }
                     )
+                }
+
+                composable<Configuration> {
+                    ConfigurationScreen(
+                        viewModel = MafiaViewModel(),
+                        onNavigateToGame = { navController.navigate(Game) },
+                        onNavigateBack = { navController.popBackStack() }
+                    )
+
                 }
             }
         }

@@ -13,9 +13,11 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class MafiaViewModel(
-    private val saveConfigurationUseCase: SaveConfigurationUseCase,
-    private val roleAsignUseCase: RoleAsignUseCase
+
 ): ViewModel() {
+
+    private val saveConfigurationUseCase: SaveConfigurationUseCase = SaveConfigurationUseCase()
+    private val roleAsignUseCase: RoleAsignUseCase = RoleAsignUseCase()
 
     private val _uiGameState = MutableStateFlow(GameState(listOf<Player>(), 1, 1, 1))
     val uiGameState: StateFlow<GameState> = _uiGameState.asStateFlow()
